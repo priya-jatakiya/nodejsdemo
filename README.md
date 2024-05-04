@@ -27,4 +27,4 @@
 3. MONGODB_CONN_URL: mongodb connection url with database
 4. BCRYPT_SALT_ROUNDS:Number of salt rounds to create encrypted password using bcrypt
 
-# To access and perform CRUD operation with product need to set header for Authorization Bearer Token which will be received via response of user registration or login endpoint
+-- To access and perform CRUD operation with product need to set header for Authorization Bearer Token which will be received via response of user registration or login endpoint
