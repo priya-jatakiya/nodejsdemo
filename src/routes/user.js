@@ -17,11 +17,11 @@ router.post('/api/auth/register',userValidate , async (req, res) => {
 });
 
 // Login User
-router.post('/api/auth/login', async (req, res) => {
+router.post('/api/auth/login', userValidate, async (req, res) => {
     try {
         let userData = await userModel.findOne({email: req.body.email});
         if (!userData._id) throw new Error('Something went wrong.');
-        let isValidPassword = bcrypt.compare(req.body.email, userData.password);
+        let isValidPassword = await bcrypt.compare(req.body.password, userData.password);
         if (!isValidPassword) throw new Error('Invalid login credentials.');
         userData = await userModel.generateToken(userData);
         res.status(200).send(userData);

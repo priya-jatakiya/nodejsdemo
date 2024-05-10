@@ -65,7 +65,7 @@ router.post('/api/products', auth, upload.single('product_image'), async (req, r
         let productReqData = {
             ...req.body,
         };
-        if (req.file.filename != '' && req.file.filename != undefined) productReqData.product_image = req.file.filename;
+        if (req.file != undefined && req.file.filename != '' && req.file.filename != undefined) productReqData.product_image = req.file.filename;
         let productData = await (new productModel(productReqData)).save();
         if (!productData._id) throw new Error('Something went wrong.');
         res.status(201).send(productData);
@@ -82,7 +82,7 @@ router.put('/api/products/:id', auth, upload.single('product_image'), async (req
         if (req.body.price != '' && req.body.price != undefined) reqProData.price = req.body.price;
         if (req.body.product_type != '' && req.body.product_type != undefined) reqProData.product_type = req.body.product_type;
         if (req.body.description != '' && req.body.description != undefined) reqProData.description = req.body.description;
-        if (req.file.filename != '' && req.file.filename != undefined) reqProData.product_image = req.file.filename;
+        if (req.file != undefined && req.file.filename != '' && req.file.filename != undefined) reqProData.product_image = req.file.filename;
         let productData = await productModel.findByIdAndUpdate(req.params.id, reqProData, {returnDocument: true});
         if (!productData._id) throw new Error('Something went wrong.');
         res.status(200).send(productData);
